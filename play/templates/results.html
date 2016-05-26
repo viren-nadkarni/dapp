@@ -14,7 +14,7 @@
 
         {% for app in search_results %}
         <tr>
-            <td><a href="../app/{{ app.app_id }}">{{ app.app_id }}</a></td>
+            <td><a href="./{{ app.app_id }}">{{ app.app_id }}</a></td>
             <td>{{ app.app_name }}</td>
             <td>{{ app.dev_name }}</td>
             <td><a href="mailto:{{ app.dev_email }}">{{ app.dev_email }}</a></td>
