@@ -14,6 +14,15 @@ APP_DETAILS_URL = 'https://play.google.com/store/apps/details?id={}'
 
 
 def get_app_details(app_id):
+    """This function will check the db cache if the details about an app with given id exists.
+    Otherwise, it will be fetched from playstore, and cached
+    
+    args:
+        app_id -- java convention style id of the app
+        
+    returns:
+        dict of app details
+    """
     try:
         # check if the said app details are available in db
         # get it as a dict object
@@ -76,6 +85,8 @@ def results(request):
     template = loader.get_template('results.html')
     search_term = request.GET.get('search_term')
 
+    # search results will always be fetched from play store
+    # however, for app details, db cache will be checked first
     store_results_raw = requests.get( APP_SEARCH_URL.format(search_term) ).text
     tree = lxml.html.fromstring(store_results_raw)
     results = tree.xpath('//div[@class="card-content id-track-click id-track-impression"]/@data-docid')
