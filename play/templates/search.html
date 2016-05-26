@@ -1,11 +1,9 @@
-<html>
-    <head>
-    </head>
-    <body>
-        <h1>Search</h1>
+{% extends "base.html" %}
+
+{% block content %}
+        <h2>Search</h2>
         <form method='get' action='../results/'>
             <input id='search_term' name='search_term' type='text'>
             <button id='search_submit' type='submit'>Search</button>
         </form>
-    </body>
-</html>
+{% endblock %}
