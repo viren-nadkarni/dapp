@@ -9,6 +9,7 @@
             <th>dev_name</th>
             <th>dev_email</th>
             <th>icon_url</th>
+            <th>source</th>
         </tr>
 
         {% for app in search_results %}
@@ -18,6 +19,7 @@
             <td>{{ app.dev_name }}</td>
             <td><a href="mailto:{{ app.dev_email }}">{{ app.dev_email }}</a></td>
             <td><a href="{{ app.icon_url }}"><img src="{{ app.icon_url }}" height="48" width="48"></a></td>
+            <td>{{ app.source }}</td>
         </tr>
         {% endfor %}
 
