@@ -85,15 +85,16 @@ def results(request):
     template = loader.get_template('results.html')
     search_term = request.GET.get('search_term')
 
-    # search results will always be fetched from play store
-    # however, for app details, db cache will be checked first
-    store_results_raw = requests.get( APP_SEARCH_URL.format(search_term) ).text
-    tree = lxml.html.fromstring(store_results_raw)
-    results = tree.xpath('//div[@class="card-content id-track-click id-track-impression"]/@data-docid')
-
     output = list()
-    for app_id in results[:10]:
-        output.append( get_app_details(app_id) )
+    if search_term:
+        # search results will always be fetched from play store
+        # however, for app details, db cache will be checked first
+        store_results_raw = requests.get( APP_SEARCH_URL.format(search_term) ).text
+        tree = lxml.html.fromstring(store_results_raw)
+        results = tree.xpath('//div[@class="card-content id-track-click id-track-impression"]/@data-docid')
+
+        for app_id in results[:10]:
+            output.append( get_app_details(app_id) )
 
     return HttpResponse( template.render( context={'search_results': output} ) )
 
