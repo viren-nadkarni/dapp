@@ -1,5 +1,6 @@
 import sys
 import requests
+import logging
 import lxml.html
 
 from django.shortcuts import render
@@ -60,9 +61,11 @@ def get_app_details(app_id):
                     dev_email=output['dev_email'],
                     icon_url=output['icon_url']).save()
 
+            logging.warn('Fetched app details for {}'.format(app_id))
+
         except IndexError:
             # exception when the app does not exist on play store
-            print sys.exc_info()
+            logging.warn(sys.exc_info())
             output = {
                 'app_id': app_id,
                 'app_name': 'Not found',
@@ -73,7 +76,6 @@ def get_app_details(app_id):
             }
 
     return output
-
 
 
 def search(request): 
@@ -92,6 +94,7 @@ def results(request):
         store_results_raw = requests.get( APP_SEARCH_URL.format(search_term) ).text
         tree = lxml.html.fromstring(store_results_raw)
         results = tree.xpath('//div[@class="card-content id-track-click id-track-impression"]/@data-docid')
+        logging.warn('Fetched search results for {}'.format(search_term))
 
         for app_id in results[:10]:
             output.append( get_app_details(app_id) )

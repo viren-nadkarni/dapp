@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 
 {% block content %}
-        <h2>Search</h2>
         <form method='get' action='./results/'>
+            <label>Enter search term</label>
             <input id='search_term' name='search_term' type='text'>
             <button id='search_submit' type='submit'>Search</button>
         </form>
