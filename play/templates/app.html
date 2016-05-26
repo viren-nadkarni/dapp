@@ -1,4 +1,33 @@
 {% extends "base.html" %}
 
 {% block content %}
+    <table border="1">
+        <tr>
+            <td><b> app_id </b></td>
+            <td> {{ app.app_id }} </td>
+        </tr>
+        <tr>
+            <td><b> app_name </b></td>
+            <td> {{ app.app_name }} </td>
+        </tr>
+        <tr>
+            <td><b> dev_name </b></td>
+            <td> {{ app.dev_name }} </td>
+        </tr>
+        <tr>
+            <td><b> dev_email </b></td>
+            <td><a href="{{ app.icon_url }}">{{ app.dev_email | slice:"7:" }}</a></td>
+        </tr>
+        <tr>
+            <td><b> icon_url </b></td>
+            <td><a href="{{ app.icon_url }}"><img src="{{ app.icon_url }}" width="48" height="48"></a></td>
+        </tr>
+        <tr>
+            <td><b> source </b></td>
+            <td> {{ source }} </td>
+        </tr>
+    </table>
+    <p>
+        <a href="{{ request.META.HTTP_REFERER }}">Back to search results</a>
+    </p>
 {% endblock %}

@@ -2,4 +2,25 @@
 
 {% block content %}
 
+    <table border="1">
+        <tr>
+            <th>app_id</th>
+            <th>app_name</th>
+            <th>dev_name</th>
+            <th>dev_email</th>
+            <th>icon_url</th>
+        </tr>
+
+        {% for app in search_results %}
+        <tr>
+            <td><a href="../app/{{ app.app_id }}">{{ app.app_id }}</a></td>
+            <td>{{ app.app_name }}</td>
+            <td>{{ app.dev_name }}</td>
+            <td><a href="mailto:{{ app.dev_email }}">{{ app.dev_email }}</a></td>
+            <td><a href="{{ app.icon_url }}"><img src="{{ app.icon_url }}" height="48" width="48"></a></td>
+        </tr>
+        {% endfor %}
+
+    </table>
+
 {% endblock %}
