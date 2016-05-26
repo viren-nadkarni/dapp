@@ -5,7 +5,7 @@ from django.utils.encoding import python_2_unicode_compatible
 
 @python_2_unicode_compatible
 class PlayApp(models.Model):
-    app_id = models.CharField(max_length=256)
+    app_id = models.CharField(max_length=256, primary_key=True)
     app_name = models.CharField(max_length=256)
     dev_name = models.CharField(max_length=256)
     dev_email = models.EmailField()
